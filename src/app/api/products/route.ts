@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { db } from '@/lib/db'
+import { productSchema, type ProductInput } from '@/lib/validations'
 
 export async function GET(request: Request) {
   try {
@@ -8,6 +9,7 @@ export async function GET(request: Request) {
     const featured = searchParams.get('featured') === 'true'
     const limit = parseInt(searchParams.get('limit') || '10')
     const page = parseInt(searchParams.get('page') || '1')
+    const sortBy = searchParams.get('sortBy') || 'rating'
 
     const skip = (page - 1) * limit
 
@@ -25,6 +27,27 @@ export async function GET(request: Request) {
     
     where.published = true
 
+    const orderBy: any = {}
+    switch (sortBy) {
+      case 'rating':
+        orderBy.rating = 'desc'
+        break
+      case 'price-low':
+        orderBy.price = 'asc'
+        break
+      case 'price-high':
+        orderBy.price = 'desc'
+        break
+      case 'name':
+        orderBy.name = 'asc'
+        break
+      case 'newest':
+        orderBy.createdAt = 'desc'
+        break
+      default:
+        orderBy.rating = 'desc'
+    }
+
     const [products, total] = await Promise.all([
       db.product.findMany({
         where,
@@ -36,9 +59,7 @@ export async function GET(request: Request) {
             }
           }
         },
-        orderBy: {
-          rating: 'desc'
-        },
+        orderBy,
         skip,
         take: limit
       }),
@@ -74,37 +95,16 @@ export async function GET(request: Request) {
 export async function POST(request: Request) {
   try {
     const body = await request.json()
-    const {
-      name,
-      description,
-      price,
-      originalPrice,
-      rating,
-      imageUrl,
-      affiliateLink,
-      categoryId,
-      pros,
-      cons,
-      tags,
-      featured,
-      published
-    } = body
-
+    
+    // Validar dados de entrada
+    const validatedData: ProductInput = productSchema.parse(body)
+    
     const product = await db.product.create({
       data: {
-        name,
-        description,
-        price,
-        originalPrice,
-        rating: rating || 0,
-        imageUrl,
-        affiliateLink,
-        categoryId,
-        pros: JSON.stringify(pros || []),
-        cons: JSON.stringify(cons || []),
-        tags: JSON.stringify(tags || []),
-        featured: featured || false,
-        published: published || false
+        ...validatedData,
+        pros: JSON.stringify(validatedData.pros || []),
+        cons: JSON.stringify(validatedData.cons || []),
+        tags: JSON.stringify(validatedData.tags || [])
       },
       include: {
         category: true
@@ -113,6 +113,12 @@ export async function POST(request: Request) {
 
     return NextResponse.json(product, { status: 201 })
   } catch (error) {
+    if (error instanceof z.ZodError) {
+      return NextResponse.json(
+        { error: 'Validation failed', details: error.errors },
+        { status: 400 }
+      )
+    }
     console.error('Error creating product:', error)
     return NextResponse.json(
       { error: 'Failed to create product' },

@@ -14,23 +14,43 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Z.ai Code Scaffold - AI-Powered Development",
-  description: "Modern Next.js scaffold optimized for AI-powered development with Z.ai. Built with TypeScript, Tailwind CSS, and shadcn/ui.",
-  keywords: ["Z.ai", "Next.js", "TypeScript", "Tailwind CSS", "shadcn/ui", "AI development", "React"],
-  authors: [{ name: "Z.ai Team" }],
+  title: "Blog de Afiliados - Reviews Imparciais e Links Confiáveis",
+  description: "Encontre os melhores produtos com reviews detalhadas, comparações e links de afiliado confiáveis. Faça compras inteligentes com nossas análises imparciais.",
+  keywords: ["blog de afiliados", "reviews de produtos", "comparação de produtos", "links afiliados", "melhores produtos", "tech reviews"],
+  authors: [{ name: "Blog de Afiliados Team" }],
   openGraph: {
-    title: "Z.ai Code Scaffold",
-    description: "AI-powered development with modern React stack",
-    url: "https://chat.z.ai",
-    siteName: "Z.ai",
+    title: "Blog de Afiliados - Reviews Imparciais",
+    description: "Encontre os melhores produtos com reviews detalhadas e links de afiliado confiáveis",
+    url: "https://blogafiliados.com",
+    siteName: "Blog de Afiliados",
     type: "website",
+    images: [
+      {
+        url: '/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Blog de Afiliados - Reviews Imparciais',
+      },
+    ],
   },
   twitter: {
-    card: "summary_large_image",
-    title: "Z.ai Code Scaffold",
-    description: "AI-powered development with modern React stack",
+    card: 'summary_large_image',
+    title: 'Blog de Afiliados - Reviews Imparciais',
+    description: 'Encontre os melhores produtos com reviews detalhadas e links de afiliado confiáveis',
+    images: ['/og-image.jpg'],
   },
-};
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+}
 
 export default function RootLayout({
   children,
