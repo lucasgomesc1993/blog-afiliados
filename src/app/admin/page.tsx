@@ -13,7 +13,9 @@ import {
   Eye,
   Plus,
   BarChart3,
-  FolderOpen
+  FolderOpen,
+  FileText,
+  Calendar
 } from 'lucide-react'
 import Link from 'next/link'
 
@@ -25,6 +27,9 @@ interface DashboardStats {
   featuredProducts: number
   recentReviews: number
   avgRating: number
+  totalPosts: number
+  publishedPosts: number
+  recentPosts: any[]
 }
 
 export default function AdminDashboard() {
@@ -35,7 +40,10 @@ export default function AdminDashboard() {
     totalUsers: 0,
     featuredProducts: 0,
     recentReviews: 0,
-    avgRating: 0
+    avgRating: 0,
+    totalPosts: 0,
+    publishedPosts: 0,
+    recentPosts: []
   })
   const [loading, setLoading] = useState(true)
 
@@ -46,20 +54,24 @@ export default function AdminDashboard() {
   const fetchDashboardData = async () => {
     try {
       // Buscar estatísticas
-      const [productsRes, categoriesRes, reviewsRes] = await Promise.all([
+      const [productsRes, categoriesRes, reviewsRes, postsRes] = await Promise.all([
         fetch('/api/products?limit=1'),
         fetch('/api/categories'),
-        fetch('/api/reviews?limit=1')
+        fetch('/api/reviews?limit=1'),
+        fetch('/api/posts?limit=1')
       ])
 
       const productsData = await productsRes.json()
       const categoriesData = await categoriesRes.json()
-      const reviewsData = await reviewsData.json()
+      const reviewsData = await reviewsRes.json()
+      const postsData = await postsRes.json()
 
       // Calcular estatísticas
       const featuredCount = productsData.products.filter((p: any) => p.featured).length
       const totalReviews = productsData.products.reduce((sum: number, p: any) => sum + p.reviewCount, 0)
       const avgRating = productsData.products.reduce((sum: number, p: any) => sum + p.rating, 0) / productsData.products.length
+      const publishedPosts = postsData.posts.filter((p: any) => p.published).length
+      const recentPosts = postsData.posts.slice(0, 5)
 
       setStats({
         totalProducts: productsData.pagination.total,
@@ -68,7 +80,10 @@ export default function AdminDashboard() {
         totalUsers: 42, // Mock - implementar quando tiver sistema de usuários
         featuredProducts: featuredCount,
         recentReviews: reviewsData.pagination.total,
-        avgRating: avgRating || 0
+        avgRating: avgRating || 0,
+        totalPosts: postsData.pagination.total,
+        publishedPosts,
+        recentPosts
       })
     } catch (error) {
       console.error('Error fetching dashboard data:', error)
@@ -103,6 +118,15 @@ export default function AdminDashboard() {
       color: 'text-green-600',
       bgColor: 'bg-green-50',
       link: '/admin/categories'
+    },
+    {
+      title: 'Artigos',
+      value: stats.totalPosts,
+      description: `${stats.publishedPosts} publicados`,
+      icon: FileText,
+      color: 'text-orange-600',
+      bgColor: 'bg-orange-50',
+      link: '/admin/posts'
     },
     {
       title: 'Reviews',
@@ -151,7 +175,7 @@ export default function AdminDashboard() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.1 }}
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6"
       >
         {statCards.map((stat, index) => (
           <motion.div
@@ -264,6 +288,12 @@ export default function AdminDashboard() {
                   Adicionar Produto
                 </Button>
               </Link>
+              <Link href="/admin/posts/new">
+                <Button variant="outline" size="sm" className="w-full justify-start">
+                  <FileText className="mr-2 h-4 w-4" />
+                  Novo Artigo
+                </Button>
+              </Link>
               <Link href="/admin/categories/new">
                 <Button variant="outline" size="sm" className="w-full justify-start">
                   <FolderOpen className="mr-2 h-4 w-4" />
@@ -276,6 +306,54 @@ export default function AdminDashboard() {
                   Reviews Pendentes
                 </Button>
               </Link>
+            </div>
+          </CardContent>
+        </Card>
+      </motion.div>
+
+      {/* Recent Posts */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.25 }}
+      >
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <FileText className="h-5 w-5" />
+              Posts Recentes
+            </CardTitle>
+            <CardDescription>
+              Últimos artigos publicados
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-4">
+              {stats.recentPosts.length > 0 ? (
+                stats.recentPosts.map((post, index) => (
+                  <div key={post.id} className="flex items-center gap-3 p-3 bg-muted rounded-lg">
+                    <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                    <div className="flex-1">
+                      <p className="text-sm font-medium">{post.title}</p>
+                      <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                        <span>{post.published ? 'Publicado' : 'Rascunho'}</span>
+                        <span>•</span>
+                        <span>{new Date(post.createdAt).toLocaleDateString('pt-BR')}</span>
+                      </div>
+                    </div>
+                    <Link href={`/admin/posts/${post.id}/edit`}>
+                      <Button variant="outline" size="sm">
+                        Editar
+                      </Button>
+                    </Link>
+                  </div>
+                ))
+              ) : (
+                <div className="text-center py-8">
+                  <FileText className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
+                  <p className="text-muted-foreground">Nenhum post encontrado</p>
+                </div>
+              )}
             </div>
           </CardContent>
         </Card>

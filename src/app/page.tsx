@@ -5,8 +5,9 @@ import { motion } from 'framer-motion'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import { ArrowRight, Star, TrendingUp, ShoppingCart, Zap, Shield, Award } from 'lucide-react'
+import { ArrowRight, Star, TrendingUp, ShoppingCart, Zap, Shield, Award, FileText, Calendar } from 'lucide-react'
 import Hero from '@/components/Hero'
+import { getPublishedPosts } from '@/lib/posts'
 
 export default function Home() {
   const featuredProducts = [
@@ -285,6 +286,70 @@ export default function Home() {
                 >
                   {feature.description}
                 </motion.p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Recent Posts Section */}
+      <section className="py-20">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <motion.h2 
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
+              viewport={{ once: true, margin: "-100px" }}
+              className="text-3xl md:text-4xl font-bold mb-4"
+            >
+              Artigos Recentes
+            </motion.h2>
+            <motion.p 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+              viewport={{ once: true, margin: "-100px" }}
+              className="text-xl text-muted-foreground max-w-2xl mx-auto"
+            >
+              Dicas, análises e guias para ajudá-lo a fazer as melhores escolhas
+            </motion.p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {getPublishedPosts().map((post, index) => (
+              <motion.div
+                key={post.id}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.2, ease: "easeOut" }}
+                viewport={{ once: true, margin: "-100px" }}
+              >
+                <Card className="group h-full hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+                  <CardHeader className="pb-3">
+                    <div className="flex items-center gap-2 mb-3">
+                      <Calendar className="h-4 w-4 text-muted-foreground" />
+                      <span className="text-sm text-muted-foreground">
+                        {new Date(post.createdAt).toLocaleDateString('pt-BR')}
+                      </span>
+                    </div>
+                    <CardTitle className="group-hover:text-primary transition-colors line-clamp-2">
+                      {post.title}
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <p className="text-muted-foreground line-clamp-3">
+                      {post.excerpt || post.content.substring(0, 150) + '...'}
+                    </p>
+                    <div className="flex gap-2">
+                      <Button size="sm" variant="outline" asChild>
+                        <Link href={`/blog/${post.slug}`}>
+                          Ler Artigo
+                        </Link>
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
               </motion.div>
             ))}
           </div>
