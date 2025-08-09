@@ -11,7 +11,7 @@ export default function TeamPage() {
       name: 'Dra. Sarah Johnson',
       position: 'Diretora Executiva (CEO)',
       bio: 'Líder visionária com mais de 15 anos de experiência em IA e machine learning. Ex-chefe de pesquisa de IA no Google.',
-      image: '/api/placeholder/300/300',
+      image: '/images/team/sarah-johnson-ceo.jpg',
       linkedin: '#',
       twitter: '#',
       email: 'sarah.johnson@z.ai'
@@ -21,7 +21,7 @@ export default function TeamPage() {
       name: 'Michael Chen',
       position: 'Diretor de Tecnologia (CTO)',
       bio: 'Especialista em sistemas de IA escaláveis e computação distribuída. Liderou infraestrutura de IA na Amazon Web Services.',
-      image: '/api/placeholder/300/300',
+      image: '/images/team/michael-chen-cto.jpg',
       linkedin: '#',
       twitter: '#',
       email: 'michael.chen@z.ai'
@@ -31,7 +31,7 @@ export default function TeamPage() {
       name: 'Prof. Emily Rodriguez',
       position: 'Diretora Científica (CSO)',
       bio: 'Pesquisadora renomada em processamento de linguagem natural e visão computacional. PhD pelo MIT.',
-      image: '/api/placeholder/300/300',
+      image: '/images/team/emily-rodriguez-cso.jpg',
       linkedin: '#',
       twitter: '#',
       email: 'emily.rodriguez@z.ai'
@@ -44,7 +44,7 @@ export default function TeamPage() {
       name: 'Dr. James Wilson',
       position: 'Cientista de Dados Principal',
       bio: 'Especialista em deep learning e redes neurais. Autor publicado em principais conferências de IA.',
-      image: '/api/placeholder/300/300',
+      image: '/images/team/james-wilson-data-scientist.jpg',
       linkedin: '#',
       twitter: '#',
       email: 'james.wilson@z.ai'
@@ -54,7 +54,7 @@ export default function TeamPage() {
       name: 'Sarah Thompson',
       position: 'Chefe de Estratégia de IA',
       bio: 'Ex-consultora da McKinsey especializada em transformação de IA e estratégia digital.',
-      image: '/api/placeholder/300/300',
+      image: '/images/team/sarah-thompson-strategy.jpg',
       linkedin: '#',
       twitter: '#',
       email: 'sarah.thompson@z.ai'
@@ -64,7 +64,7 @@ export default function TeamPage() {
       name: 'David Kim',
       position: 'Engenheiro Líder de Machine Learning',
       bio: 'Especialista em MLOps e sistemas de ML em produção. Construiu plataformas de IA na Netflix.',
-      image: '/api/placeholder/300/300',
+      image: '/images/team/professional-team-member.jpg',
       linkedin: '#',
       twitter: '#',
       email: 'david.kim@z.ai'
@@ -74,7 +74,7 @@ export default function TeamPage() {
       name: 'Lisa Anderson',
       position: 'Pesquisadora Sênior de IA',
       bio: 'Foco em IA ética e desenvolvimento responsável de IA. Candidata a PhD pela Stanford.',
-      image: '/api/placeholder/300/300',
+      image: '/images/team/professional-team-member.jpg',
       linkedin: '#',
       twitter: '#',
       email: 'lisa.anderson@z.ai'
@@ -84,7 +84,7 @@ export default function TeamPage() {
       name: 'Robert Martinez',
       position: 'Gerente de Produto, Soluções de IA',
       bio: 'Líder de produto com experiência em produtos SaaS alimentados por IA. Ex-PM na Salesforce.',
-      image: '/api/placeholder/300/300',
+      image: '/images/team/professional-team-member.jpg',
       linkedin: '#',
       twitter: '#',
       email: 'robert.martinez@z.ai'
@@ -94,7 +94,7 @@ export default function TeamPage() {
       name: 'Jennifer Lee',
       position: 'Designer de UX, Produtos de IA',
       bio: 'Especialista em interação humano-IA e design de experiência do usuário para aplicações de IA.',
-      image: '/api/placeholder/300/300',
+      image: '/images/team/professional-team-member.jpg',
       linkedin: '#',
       twitter: '#',
       email: 'jennifer.lee@z.ai'

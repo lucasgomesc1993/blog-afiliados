@@ -21,6 +21,7 @@ import {
   Tag
 } from 'lucide-react'
 import Link from 'next/link'
+import ProductCard from '@/components/ui/product-card'
 
 // Mock data - em produção viria do banco de dados
 const dealsData = {
@@ -33,7 +34,7 @@ const dealsData = {
       discount: 13,
       discountAmount: 'R$ 600',
       rating: 4.8,
-      image: '/placeholder-phone.jpg',
+      image: '/images/products/smartphone-galaxy-pro-max.jpg',
       affiliateLink: 'https://afiliado.com/galaxy-pro-max',
       store: 'Amazon',
       expiresIn: '2 dias',
@@ -49,7 +50,7 @@ const dealsData = {
       discount: 13,
       discountAmount: 'R$ 800',
       rating: 4.6,
-      image: '/placeholder-laptop.jpg',
+      image: '/images/products/laptop-ultrabook-pro.jpg',
       affiliateLink: 'https://afiliado.com/ultrabook-pro',
       store: 'Magazine Luiza',
       expiresIn: '1 dia',
@@ -67,7 +68,7 @@ const dealsData = {
       discount: 31,
       discountAmount: 'R$ 400',
       rating: 4.7,
-      image: '/placeholder-headphones.jpg',
+      image: '/images/products/headphones-wireless-x.jpg',
       affiliateLink: 'https://afiliado.com/fones-x',
       store: 'Americanas',
       expiresIn: '12 horas',
@@ -83,7 +84,7 @@ const dealsData = {
       discount: 27,
       discountAmount: 'R$ 800',
       rating: 4.5,
-      image: '/placeholder-tv.jpg',
+      image: '/images/products/smart-tv-4k.jpg',
       affiliateLink: 'https://afiliado.com/smart-tv',
       store: 'Casas Bahia',
       expiresIn: '8 horas',
@@ -99,7 +100,7 @@ const dealsData = {
       discount: 38,
       discountAmount: 'R$ 600',
       rating: 4.4,
-      image: '/placeholder-watch.jpg',
+      image: '/images/products/smartwatch-premium.jpg',
       affiliateLink: 'https://afiliado.com/smartwatch',
       store: 'Amazon',
       expiresIn: '6 horas',

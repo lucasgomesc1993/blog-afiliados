@@ -20,7 +20,7 @@ export default function CaseStudies() {
         'Melhoria de 40% nos índices de satisfação do cliente'
       ],
       technologies: ['Machine Learning', 'Processamento em Tempo Real', 'Análise Comportamental', 'Detecção de Anomalias'],
-      image: '/api/placeholder/600/400',
+      image: '/images/case-studies/financial-fraud-detection.jpg',
       href: '/case-studies/project-alpha',
       featured: true
     },
@@ -38,7 +38,7 @@ export default function CaseStudies() {
         'Melhoria de 35% nos resultados dos pacientes'
       ],
       technologies: ['Visão Computacional', 'Deep Learning', 'Imagem Médica', 'Saúde Móvel'],
-      image: '/api/placeholder/600/400',
+      image: '/images/case-studies/healthcare-ai-diagnostics.jpg',
       href: '/case-studies/project-beta'
     },
     {
@@ -55,7 +55,7 @@ export default function CaseStudies() {
         'Aumento de 60% no engajamento do cliente'
       ],
       technologies: ['Análise Preditiva', 'Sistemas de Recomendação', 'Otimização de Inventário', 'Personalização'],
-      image: '/api/placeholder/600/400',
+      image: '/images/case-studies/retail-ai-inventory.jpg',
       href: '/case-studies/retail-transformation'
     },
     {
@@ -72,7 +72,7 @@ export default function CaseStudies() {
         'Melhoria de 35% na eficácia geral do equipamento'
       ],
       technologies: ['Sensores IoT', 'Manutenção Preditiva', 'Análise de Séries Temporais', 'Monitoramento em Tempo Real'],
-      image: '/api/placeholder/600/400',
+      image: '/images/case-studies/manufacturing-predictive-maintenance.jpg',
       href: '/case-studies/manufacturing-excellence'
     }
   ]
@@ -290,7 +290,7 @@ export default function CaseStudies() {
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>
-            <Button size="lg" variant="outline" asChild>
+            <Button size="lg" variant="inverse" asChild>
               <Link href="/contact">
                 Entre em Contato
               </Link>

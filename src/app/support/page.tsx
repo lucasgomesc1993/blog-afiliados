@@ -22,7 +22,7 @@ export default function SupportPage() {
       title: 'Documentação',
       description: 'Guias abrangentes, referências de API e tutoriais',
       icon: BookOpen,
-      link: '/docs',
+      link: '/resources',
       color: 'text-blue-600'
     },
     {
@@ -30,7 +30,7 @@ export default function SupportPage() {
       title: 'Tutoriais em Vídeo',
       description: 'Guias passo a passo em vídeo para tarefas comuns',
       icon: Video,
-      link: '/tutorials',
+      link: '/resources/webinars',
       color: 'text-purple-600'
     },
     {
@@ -38,7 +38,7 @@ export default function SupportPage() {
       title: 'Fórum da Comunidade',
       description: 'Obtenha ajuda de nossa comunidade de especialistas',
       icon: MessageCircle,
-      link: '/community',
+      link: '/faq',
       color: 'text-green-600'
     },
     {

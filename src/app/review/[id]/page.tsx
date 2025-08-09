@@ -35,7 +35,7 @@ const productData: Record<string, any> = {
     originalPrice: 'R$ 4.599',
     discount: 13,
     affiliateLink: 'https://afiliado.com/galaxy-pro-max',
-    images: ['/placeholder-phone-1.jpg', '/placeholder-phone-2.jpg', '/placeholder-phone-3.jpg'],
+    images: ['/images/products/smartphone-galaxy-pro-max.jpg', '/images/products/smartphone-galaxy-pro-max-side.jpg', '/images/products/smartphone-galaxy-pro-max-camera.jpg'],
     description: 'O Smartphone Galaxy Pro Max é o topo de linha da Samsung, combinando design premium com performance excepcional. Equipado com o mais recente processador e câmera revolucionária, este dispositivo redefine o que um smartphone pode fazer.',
     pros: [
       'Câmera de 200MP com zoom espacial',

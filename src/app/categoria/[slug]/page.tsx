@@ -18,6 +18,7 @@ import {
   Search
 } from 'lucide-react'
 import Link from 'next/link'
+import ProductCard from '@/components/ui/product-card'
 
 // Mock data - em produção viria do banco de dados
 const categoriesData: Record<string, any> = {
@@ -65,7 +66,7 @@ const productsData = {
       price: 'R$ 3.999',
       originalPrice: 'R$ 4.599',
       discount: 13,
-      image: '/placeholder-phone.jpg',
+      image: '/images/products/smartphone-galaxy-pro-max.jpg',
       affiliateLink: 'https://afiliado.com/galaxy-pro-max',
       features: ['5G', 'Câmera Tripla', 'Tela 120Hz'],
       pros: ['Câmera incrível', 'Bateria duradoura'],
@@ -77,7 +78,7 @@ const productsData = {
       brand: 'Apple',
       rating: 4.7,
       price: 'R$ 4.299',
-      image: '/placeholder-iphone.jpg',
+      image: '/images/products/iphone-15-pro.jpg',
       affiliateLink: 'https://afiliado.com/iphone-15-pro',
       features: ['5G', 'Tela ProMotion', 'Titanium'],
       pros: ['Performance excelente', 'Câmera profissional'],
@@ -89,7 +90,7 @@ const productsData = {
       brand: 'Xiaomi',
       rating: 4.6,
       price: 'R$ 3.599',
-      image: '/placeholder-xiaomi.jpg',
+      image: '/images/products/xiaomi-14-ultra.jpg',
       affiliateLink: 'https://afiliado.com/xiaomi-14-ultra',
       features: ['5G', 'Câmera Leica', 'Carregamento rápido'],
       pros: ['Custo-benefício', 'Câmera profissional'],
@@ -101,7 +102,7 @@ const productsData = {
       brand: 'OPPO',
       rating: 4.5,
       price: 'R$ 2.999',
-      image: '/placeholder-oppo.jpg',
+      image: '/images/products/oppo-find-x6-pro.jpg',
       affiliateLink: 'https://afiliado.com/oppo-find-x6-pro',
       features: ['5G', 'Câmera Hasselblad', 'Carregamento super rápido'],
       pros: ['Design premium', 'Carregamento rápido'],
@@ -117,7 +118,7 @@ const productsData = {
       price: 'R$ 5.499',
       originalPrice: 'R$ 6.299',
       discount: 13,
-      image: '/placeholder-laptop.jpg',
+      image: '/images/products/laptop-ultrabook-pro.jpg',
       affiliateLink: 'https://afiliado.com/ultrabook-pro',
       features: ['SSD', 'Dedicado GPU', 'Tela 4K'],
       pros: ['Performance excelente', 'Design fino'],
@@ -129,7 +130,7 @@ const productsData = {
       brand: 'Apple',
       rating: 4.8,
       price: 'R$ 7.999',
-      image: '/placeholder-macbook.jpg',
+      image: '/images/products/macbook-air-m3.jpg',
       affiliateLink: 'https://afiliado.com/macbook-air-m3',
       features: ['SSD', 'Apple Silicon', 'Tela Retina'],
       pros: ['Bateria incrível', 'Performance silenciosa'],
@@ -308,74 +309,26 @@ export default function CategoryPage({ params }: { params: { slug: string } }) {
               </div>
 
               {/* Products Grid */}
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
                 {products.map((product, index) => (
                   <motion.div
                     key={product.id}
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: index * 0.1, ease: "easeOut" }}
+                    className="w-full max-w-md"
                   >
-                    <Card className="group h-full hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
-                      <CardHeader className="pb-3">
-                        <div className="flex justify-between items-start mb-3">
-                          <Badge variant="secondary">{product.brand}</Badge>
-                          {product.discount && (
-                            <Badge variant="destructive">-{product.discount}%</Badge>
-                          )}
-                        </div>
-                        <CardTitle className="group-hover:text-primary transition-colors line-clamp-2">
-                          {product.name}
-                        </CardTitle>
-                        <div className="flex items-center gap-2">
-                          <div className="flex items-center gap-1">
-                            <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                            <span className="text-sm font-medium">{product.rating}</span>
-                          </div>
-                          <span className="text-sm text-muted-foreground">•</span>
-                          <div className="flex gap-1">
-                            {product.features.slice(0, 2).map((feature, idx) => (
-                              <Badge key={idx} variant="outline" className="text-xs">
-                                {feature}
-                              </Badge>
-                            ))}
-                          </div>
-                        </div>
-                        <CardDescription className="text-lg font-semibold text-primary">
-                          {product.price}
-                          {product.originalPrice && (
-                            <span className="text-sm text-muted-foreground line-through ml-2">
-                              {product.originalPrice}
-                            </span>
-                          )}
-                        </CardDescription>
-                      </CardHeader>
-                      <CardContent className="space-y-4">
-                        <div className="space-y-2">
-                          <div className="text-sm">
-                            <span className="font-medium text-green-600">Prós:</span> {product.pros.join(', ')}
-                          </div>
-                          {product.cons && product.cons.length > 0 && (
-                            <div className="text-sm">
-                              <span className="font-medium text-red-600\">Contras:</span> {product.cons.join(', ')}
-                            </div>
-                          )}
-                        </div>
-                        <div className="flex gap-2">
-                          <Button size="sm" asChild className="flex-1">
-                            <a href={product.affiliateLink} target="_blank" rel="noopener noreferrer">
-                              <ShoppingCart className="mr-2 h-4 w-4" />
-                              Ver Preço
-                            </a>
-                          </Button>
-                          <Button size="sm" variant="outline" asChild>
-                            <Link href={`/review/${product.id}`}>
-                              Review
-                            </Link>
-                          </Button>
-                        </div>
-                      </CardContent>
-                    </Card>
+                    <ProductCard
+                      id={product.id}
+                      name={product.name}
+                      category={product.brand}
+                      rating={product.rating}
+                      price={product.price}
+                      image={product.image}
+                      affiliateLink={product.affiliateLink}
+                      pros={product.pros}
+                      cons={product.cons || []}
+                    />
                   </motion.div>
                 ))}
               </div>

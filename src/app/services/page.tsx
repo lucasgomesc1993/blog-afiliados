@@ -407,7 +407,7 @@ export default function Services() {
               </Button>
             </motion.div>
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Button size="lg" variant="outline" asChild>
+              <Button size="lg" variant="inverse" asChild>
                 <Link href="/case-studies">
                   Ver Estudos de Caso
                 </Link>

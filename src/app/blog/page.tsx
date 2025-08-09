@@ -40,6 +40,48 @@ interface BlogPost {
 
 const blogPosts: BlogPost[] = [
   {
+    id: 'ai-ethics',
+    title: 'AI Ethics: Building Responsible Artificial Intelligence',
+    excerpt: 'Exploring the ethical considerations and best practices for developing AI systems that are fair, transparent, and accountable.',
+    content: 'Conteúdo completo do artigo...',
+    author: 'Dr. Sarah Johnson',
+    date: '15 de janeiro de 2024',
+    readTime: '8 min',
+    category: 'IA Ética',
+    tags: ['ética', 'IA', 'responsabilidade', 'transparência'],
+    views: 2341,
+    featured: true,
+    image: '/images/blog/ai-ethics.jpg'
+  },
+  {
+    id: 'future-of-work',
+    title: 'The Future of Work: How AI is Transforming Industries',
+    excerpt: 'A comprehensive look at how artificial intelligence is reshaping the workplace.',
+    content: 'Conteúdo completo do artigo...',
+    author: 'Carlos Silva',
+    date: '12 de janeiro de 2024',
+    readTime: '12 min',
+    category: 'Futuro do Trabalho',
+    tags: ['futuro', 'trabalho', 'IA', 'transformação'],
+    views: 1876,
+    featured: true,
+    image: '/images/blog/future-of-work.jpg'
+  },
+  {
+    id: 'machine-learning-trends',
+    title: 'Machine Learning Trends to Watch in 2024',
+    excerpt: 'Discover the latest trends and innovations in machine learning.',
+    content: 'Conteúdo completo do artigo...',
+    author: 'Ana Santos',
+    date: '10 de janeiro de 2024',
+    readTime: '6 min',
+    category: 'Machine Learning',
+    tags: ['machine learning', 'tendências', '2024', 'inovação'],
+    views: 1543,
+    featured: false,
+    image: '/images/blog/machine-learning-trends.jpg'
+  },
+  {
     id: 'guia-comprar-smartphone',
     title: 'Guia Definitivo: Como Escolher o Smartphone Perfeito em 2024',
     excerpt: 'Descubra tudo o que você precisa saber antes de comprar seu próximo smartphone, desde especificações técnicas até dicas práticas.',
@@ -51,7 +93,7 @@ const blogPosts: BlogPost[] = [
     tags: ['smartphone', 'guia', 'dicas', 'tecnologia'],
     views: 2341,
     featured: true,
-    image: '/placeholder-smartphone-guide.jpg',
+    image: '/images/blog/smartphone-guide.jpg',
     relatedProducts: [
       { id: 1, name: 'Galaxy Pro Max', price: 'R$ 3.999' },
       { id: 2, name: 'iPhone 15 Pro', price: 'R$ 4.299' }
@@ -136,7 +178,7 @@ const blogPosts: BlogPost[] = [
   }
 ]
 
-const categories = ['Todas', 'Guias', 'Reviews', 'Tecnologia', 'Dicas']
+const categories = ['Todas', 'IA Ética', 'Futuro do Trabalho', 'Machine Learning', 'Guias', 'Reviews', 'Tecnologia', 'Dicas']
 
 export default function BlogPage() {
   const [searchQuery, setSearchQuery] = useState('')

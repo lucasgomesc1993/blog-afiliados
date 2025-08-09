@@ -7,6 +7,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge'
 import { ArrowRight, Star, TrendingUp, ShoppingCart, Zap, Shield, Award } from 'lucide-react'
 import Hero from '@/components/Hero'
+import ProductCard from '@/components/ui/product-card'
 
 export default function Home() {
   const featuredProducts = [
@@ -16,7 +17,7 @@ export default function Home() {
       category: 'Smartphones',
       rating: 4.8,
       price: 'R$ 3.999',
-      image: '/placeholder-phone.jpg',
+      image: '/images/products/smartphone-galaxy-pro-max.jpg',
       affiliateLink: 'https://afiliado.com/galaxy-pro-max',
       pros: ['Câmera incrível', 'Bateria duradoura', 'Tela AMOLED'],
       cons: ['Preço elevado']
@@ -27,7 +28,7 @@ export default function Home() {
       category: 'Notebooks',
       rating: 4.6,
       price: 'R$ 5.499',
-      image: '/placeholder-laptop.jpg',
+      image: '/images/products/laptop-ultrabook-pro.jpg',
       affiliateLink: 'https://afiliado.com/ultrabook-pro',
       pros: ['Performance excelente', 'Design fino', 'Tela 4K'],
       cons: ['Bateria poderia ser melhor']
@@ -38,7 +39,7 @@ export default function Home() {
       category: 'Áudio',
       rating: 4.7,
       price: 'R$ 899',
-      image: '/placeholder-headphones.jpg',
+      image: '/images/products/headphones-wireless-x.jpg',
       affiliateLink: 'https://afiliado.com/fones-x',
       pros: ['Cancelamento de ruído', 'Qualidade de som', 'Confortável'],
       cons: ['Preço alto']
@@ -122,7 +123,7 @@ export default function Home() {
             </motion.p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
             {featuredProducts.map((product, index) => (
               <motion.div
                 key={product.id}
@@ -130,47 +131,9 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.2, ease: "easeOut" }}
                 viewport={{ once: true, margin: "-100px" }}
+                className="w-full max-w-md"
               >
-                <Card className="group h-full hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
-                  <CardHeader className="pb-3">
-                    <div className="flex justify-between items-start mb-3">
-                      <Badge variant="secondary">{product.category}</Badge>
-                      <div className="flex items-center gap-1">
-                        <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                        <span className="text-sm font-medium">{product.rating}</span>
-                      </div>
-                    </div>
-                    <CardTitle className="group-hover:text-primary transition-colors">
-                      {product.name}
-                    </CardTitle>
-                    <CardDescription className="text-lg font-semibold text-primary">
-                      {product.price}
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent className="space-y-4">
-                    <div className="space-y-2">
-                      <div className="text-sm">
-                        <span className="font-medium text-green-600">Prós:</span> {product.pros.join(', ')}
-                      </div>
-                      <div className="text-sm">
-                        <span className="font-medium text-red-600">Contras:</span> {product.cons.join(', ')}
-                      </div>
-                    </div>
-                    <div className="flex gap-2">
-                      <Button size="sm" asChild className="flex-1">
-                        <a href={product.affiliateLink} target="_blank" rel="noopener noreferrer">
-                          <ShoppingCart className="mr-2 h-4 w-4" />
-                          Ver Preço
-                        </a>
-                      </Button>
-                      <Button size="sm" variant="outline" asChild>
-                        <Link href={`/review/${product.id}`}>
-                          Review
-                        </Link>
-                      </Button>
-                    </div>
-                  </CardContent>
-                </Card>
+                <ProductCard {...product} />
               </motion.div>
             ))}
           </div>
