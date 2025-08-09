@@ -2,12 +2,12 @@ import { ArrowRightIcon } from "lucide-react";
 import { ReactNode } from "react";
 import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
-import Github from "@/components/logos/github";
+import { Github } from "@/components/logos/github";
 import { Badge } from "@/components/ui/badge";
 import { Button, type ButtonProps } from "@/components/ui/button";
-import Glow from "@/components/ui/glow";
+import { Glow } from "@/components/ui/glow";
 import { Mockup, MockupFrame } from "@/components/ui/mockup";
-import Screenshot from "@/components/ui/screenshot";
+import { Screenshot } from "@/components/ui/screenshot";
 import { Section } from "@/components/ui/section";
 
 interface HeroButtonProps {

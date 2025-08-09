@@ -1,47 +1,79 @@
+'use client'
+
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { ArrowRight, Brain, Users, Target, Zap, Shield, TrendingUp } from 'lucide-react'
+import { Badge } from '@/components/ui/badge'
+import { ArrowRight, Star, TrendingUp, ShoppingCart, Zap, Shield, Award } from 'lucide-react'
 import Hero from '@/components/Hero'
 
 export default function Home() {
-  const services = [
+  const featuredProducts = [
     {
-      icon: Brain,
-      title: 'Soluções de IA',
-      description: 'Soluções de inteligência artificial de ponta adaptadas às necessidades do seu negócio.',
-      href: '/ai-solutions'
+      id: 1,
+      name: 'Smartphone Galaxy Pro Max',
+      category: 'Smartphones',
+      rating: 4.8,
+      price: 'R$ 3.999',
+      image: '/placeholder-phone.jpg',
+      affiliateLink: 'https://afiliado.com/galaxy-pro-max',
+      pros: ['Câmera incrível', 'Bateria duradoura', 'Tela AMOLED'],
+      cons: ['Preço elevado']
     },
     {
-      icon: Users,
-      title: 'Consultoria',
-      description: 'Orientação especializada para transformar seu negócio com IA e automação.',
-      href: '/consulting'
+      id: 2,
+      name: 'Notebook UltraBook Pro',
+      category: 'Notebooks',
+      rating: 4.6,
+      price: 'R$ 5.499',
+      image: '/placeholder-laptop.jpg',
+      affiliateLink: 'https://afiliado.com/ultrabook-pro',
+      pros: ['Performance excelente', 'Design fino', 'Tela 4K'],
+      cons: ['Bateria poderia ser melhor']
     },
     {
-      icon: Target,
-      title: 'Estudos de Caso',
-      description: 'Descubra como ajudamos empresas a alcançar seus objetivos.',
-      href: '/case-studies'
+      id: 3,
+      name: 'Fones de Ouvido Wireless X',
+      category: 'Áudio',
+      rating: 4.7,
+      price: 'R$ 899',
+      image: '/placeholder-headphones.jpg',
+      affiliateLink: 'https://afiliado.com/fones-x',
+      pros: ['Cancelamento de ruído', 'Qualidade de som', 'Confortável'],
+      cons: ['Preço alto']
     }
+  ]
+
+  const categories = [
+    { name: 'Smartphones', icon: '📱', count: 45, href: '/categoria/smartphones' },
+    { name: 'Notebooks', icon: '💻', count: 32, href: '/categoria/notebooks' },
+    { name: 'Áudio', icon: '🎧', count: 28, href: '/categoria/audio' },
+    { name: 'Casa Inteligente', icon: '🏠', count: 19, href: '/categoria/casa-inteligente' },
+    { name: 'Gaming', icon: '🎮', count: 24, href: '/categoria/gaming' },
+    { name: 'Fitness', icon: '💪', count: 16, href: '/categoria/fitness' }
   ]
 
   const features = [
     {
-      icon: Zap,
-      title: 'Rapidez Extrema',
-      description: 'Nossas soluções de IA entregam resultados em tempo recorde, acelerando o crescimento do seu negócio.'
+      icon: Star,
+      title: 'Reviews Imparciais',
+      description: 'Análises detalhadas e honestas para ajudar você a fazer a melhor escolha.'
     },
     {
       icon: Shield,
-      title: 'Seguro e Confiável',
-      description: 'Segurança de nível empresarial com garantia de 99,9% de tempo de atividade para sua tranquilidade.'
+      title: 'Links Verificados',
+      description: 'Todos os links de afiliado são de lojas confiáveis e seguras.'
     },
     {
       icon: TrendingUp,
-      title: 'Crescimento Escalável',
-      description: 'Nossas soluções crescem com seu negócio, garantindo sucesso a longo prazo.'
+      title: 'Preços Atualizados',
+      description: 'Monitoramos os preços para garantir sempre as melhores ofertas.'
+    },
+    {
+      icon: Award,
+      title: 'Especialistas',
+      description: 'Nossa equipe testa cada produto para oferecer análises completas.'
     }
   ]
 
@@ -49,24 +81,24 @@ export default function Home() {
     <div className="flex flex-col">
       {/* Hero Section */}
       <Hero
-        title="Soluções de IA Centradas no Ser Humano"
-        description="Transforme seu negócio com inteligência artificial de ponta que coloca as pessoas em primeiro lugar."
+        title="Encontre os Melhores Produtos com Reviews Imparciais"
+        description="Análises detalhadas, comparações e links de afiliado confiáveis para você fazer compras inteligentes."
         badge={false}
         buttons={[
           {
-            href: "/consulting",
-            text: "Começar",
+            href: "/melhores/geral",
+            text: "Ver Melhores Produtos",
             iconRight: <ArrowRight className="ml-2 h-4 w-4" />
           },
           {
-            href: "/services",
-            text: "Explorar Serviços",
+            href: "/ofertas",
+            text: "Ofertas do Dia",
             variant: "outline"
           }
         ]}
       />
 
-      {/* Services Section */}
+      {/* Featured Products Section */}
       <section className="py-20 bg-muted/30">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
@@ -77,7 +109,7 @@ export default function Home() {
               viewport={{ once: true, margin: "-100px" }}
               className="text-3xl md:text-4xl font-bold mb-4"
             >
-              Nossos Serviços
+              Produtos em Destaque
             </motion.h2>
             <motion.p 
               initial={{ opacity: 0, y: 20 }}
@@ -86,43 +118,57 @@ export default function Home() {
               viewport={{ once: true, margin: "-100px" }}
               className="text-xl text-muted-foreground max-w-2xl mx-auto"
             >
-              Soluções de IA abrangentes projetadas para impulsionar inovação e crescimento para seu negócio.
+              Os produtos mais avaliados e recomendados pela nossa equipe
             </motion.p>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {services.map((service, index) => (
+            {featuredProducts.map((product, index) => (
               <motion.div
-                key={index}
+                key={product.id}
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.2, ease: "easeOut" }}
                 viewport={{ once: true, margin: "-100px" }}
               >
                 <Card className="group h-full hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
-                  <CardHeader>
-                    <motion.div 
-                      whileHover={{ scale: 1.1, rotate: 5 }}
-                      className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4"
-                    >
-                      <service.icon className="h-6 w-6 text-primary" />
-                    </motion.div>
+                  <CardHeader className="pb-3">
+                    <div className="flex justify-between items-start mb-3">
+                      <Badge variant="secondary">{product.category}</Badge>
+                      <div className="flex items-center gap-1">
+                        <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                        <span className="text-sm font-medium">{product.rating}</span>
+                      </div>
+                    </div>
                     <CardTitle className="group-hover:text-primary transition-colors">
-                      {service.title}
+                      {product.name}
                     </CardTitle>
-                    <CardDescription>
-                      {service.description}
+                    <CardDescription className="text-lg font-semibold text-primary">
+                      {product.price}
                     </CardDescription>
                   </CardHeader>
-                  <CardContent>
-                    <motion.div whileHover={{ x: 5 }} whileTap={{ scale: 0.95 }}>
-                      <Button variant="ghost" className="p-0 h-auto" asChild>
-                        <Link href={service.href} className="flex items-center text-primary">
-                          Saiba mais
-                          <ArrowRight className="ml-2 h-4 w-4" />
+                  <CardContent className="space-y-4">
+                    <div className="space-y-2">
+                      <div className="text-sm">
+                        <span className="font-medium text-green-600">Prós:</span> {product.pros.join(', ')}
+                      </div>
+                      <div className="text-sm">
+                        <span className="font-medium text-red-600">Contras:</span> {product.cons.join(', ')}
+                      </div>
+                    </div>
+                    <div className="flex gap-2">
+                      <Button size="sm" asChild className="flex-1">
+                        <a href={product.affiliateLink} target="_blank" rel="noopener noreferrer">
+                          <ShoppingCart className="mr-2 h-4 w-4" />
+                          Ver Preço
+                        </a>
+                      </Button>
+                      <Button size="sm" variant="outline" asChild>
+                        <Link href={`/review/${product.id}`}>
+                          Review
                         </Link>
                       </Button>
-                    </motion.div>
+                    </div>
                   </CardContent>
                 </Card>
               </motion.div>
@@ -131,7 +177,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Features Section */}
+      {/* Categories Section */}
       <section className="py-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
@@ -142,7 +188,7 @@ export default function Home() {
               viewport={{ once: true, margin: "-100px" }}
               className="text-3xl md:text-4xl font-bold mb-4"
             >
-              Por que Escolher a Z.ai?
+              Categorias
             </motion.h2>
             <motion.p 
               initial={{ opacity: 0, y: 20 }}
@@ -151,11 +197,61 @@ export default function Home() {
               viewport={{ once: true, margin: "-100px" }}
               className="text-xl text-muted-foreground max-w-2xl mx-auto"
             >
-              Combinamos tecnologia de ponta com experiência humana para entregar resultados excepcionais.
+              Explore nossas categorias e encontre o produto perfeito para você
             </motion.p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+            {categories.map((category, index) => (
+              <motion.div
+                key={category.name}
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5, delay: index * 0.1, ease: "easeOut" }}
+                viewport={{ once: true, margin: "-100px" }}
+              >
+                <Link href={category.href}>
+                  <Card className="group text-center p-6 hover:shadow-lg transition-all duration-300 hover:-translate-y-1 cursor-pointer">
+                    <div className="text-4xl mb-3">{category.icon}</div>
+                    <h3 className="font-semibold mb-1 group-hover:text-primary transition-colors">
+                      {category.name}
+                    </h3>
+                    <p className="text-sm text-muted-foreground">
+                      {category.count} produtos
+                    </p>
+                  </Card>
+                </Link>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Features Section */}
+      <section className="py-20 bg-muted/30">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <motion.h2 
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
+              viewport={{ once: true, margin: "-100px" }}
+              className="text-3xl md:text-4xl font-bold mb-4"
+            >
+              Por Que Escolher Nossas Reviews?
+            </motion.h2>
+            <motion.p 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+              viewport={{ once: true, margin: "-100px" }}
+              className="text-xl text-muted-foreground max-w-2xl mx-auto"
+            >
+              Comprometidos com transparência e qualidade em todas as análises
+            </motion.p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {features.map((feature, index) => (
               <motion.div
                 key={index}
@@ -211,7 +307,7 @@ export default function Home() {
             viewport={{ once: true, margin: "-100px" }}
             className="text-3xl md:text-4xl font-bold mb-4"
           >
-            Pronto para Transformar seu Negócio?
+            Pronto para Encontrar o Produto Perfeito?
           </motion.h2>
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
@@ -220,7 +316,7 @@ export default function Home() {
             viewport={{ once: true, margin: "-100px" }}
             className="text-xl mb-8 opacity-90 max-w-2xl mx-auto"
           >
-            Vamos discutir como nossas soluções de IA podem ajudá-lo a alcançar seus objetivos e impulsionar a inovação.
+            Explore nossas reviews detalhadas e faça compras inteligentes com links de afiliado confiáveis.
           </motion.p>
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
@@ -230,8 +326,8 @@ export default function Home() {
           >
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <Button size="lg" variant="secondary" asChild>
-                <Link href="/contact">
-                  Agendar uma Consulta
+                <Link href="/melhores/geral">
+                  Ver Todos os Produtos
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
