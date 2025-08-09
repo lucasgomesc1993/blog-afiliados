@@ -12,7 +12,8 @@ import {
   TrendingUp, 
   Eye,
   Plus,
-  BarChart3
+  BarChart3,
+  FolderOpen
 } from 'lucide-react'
 import Link from 'next/link'
 

@@ -17,7 +17,9 @@ import {
   Star,
   DollarSign,
   Image as ImageIcon,
-  Link as LinkIcon
+  Link as LinkIcon,
+  Package,
+  Settings
 } from 'lucide-react'
 import Link from 'next/link'
 
